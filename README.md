@@ -1,7 +1,7 @@
 # EEG Preprocessing & Segmentation Scripts  
 
 ## Overview  
-This repository contains MATLAB scripts for preprocessing and segmenting EEG event data. These scripts streamline the analysis of several different paradigms and structured event data by ensuring event integrity and proper segmentation. Made to be used with Avocodo (https://github.com/winkoan/AVOCODO).
+This repository contains MATLAB scripts for preprocessing and segmenting EEG event data. These scripts streamline the analysis of several different paradigms and structured event data by ensuring event integrity and proper segmentation. Made to be used with AVOCODO (https://github.com/winkoan/AVOCODO).
 
 ## Scripts  
 
