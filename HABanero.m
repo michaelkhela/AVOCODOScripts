@@ -6,7 +6,7 @@
 % Additionally, will segement the data if the data needs to be segemented.
 % Created by Michael Khela (ch242188)
 
-% === seg_base processing: Check for 'seg_str' and 'seg_end' ===
+% === Check for 'seg_str' and 'seg_end' ===
 seg_start = 'seg_str';
 seg_end = 'seg_end';
 
@@ -16,20 +16,14 @@ end_idx = find(strcmp({EEG.event.type}, seg_end), 1, 'last');
 if ~isempty(start_idx) && ~isempty(end_idx)
     start_latency = EEG.event(start_idx).latency;
     end_latency = EEG.event(end_idx).latency; 
-
-    %================= added by Winko An 02/10/2025 =======================
-    rej = [start_latency,end_latency];%start and end of segment (ms)
-    EEG = eeg_eegrej(EEG,rej);
-    %======================================================================
     
-    fprintf('Segment found. Processing only this segment.\n');
+    % keep only that segment
+    EEG = pop_select(EEG, 'point', [start_latency end_latency]);
+    
+    fprintf('Segment found. Kept samples %d to %d only.\n', start_latency, end_latency);
 else
     fprintf('No segmentation markers found. Processing the entire dataset.\n');
 end
-
-% Remove segmentation markers
-EEG.event(strcmp({EEG.event.type}, 'seg_str')) = [];
-EEG.event(strcmp({EEG.event.type}, 'seg_end')) = [];
 
 % === Habituation Processing ===
 % Define the markers indicating habituation events
